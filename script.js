@@ -1,7 +1,7 @@
 
 let activeSection = "text-section";
 let textData = [];
-let statsData = {};
+let statsData = [];
 
 let filters = {
   textId: "all",
@@ -13,7 +13,10 @@ let filters = {
 async function loadData() {
   try {
     const statsResponse = await fetch("https://zeze440.github.io/vocab-viewer/stats_data.json");
+    statsData = await statsResponse.json();
+
     const textResponse = await fetch("https://zeze440.github.io/vocab-viewer/text_data.json");
+    textData = await textResponse.json();
 
     initApp(statsData, textData);
   } catch (error) {
@@ -28,7 +31,7 @@ function initApp(statsData, textData) {
   const container = document.getElementById("all-texts-container");
   const select = document.getElementById("textFilter");
 
-  // 옵션 생성
+  // 옵션 추가
   textData.forEach((text) => {
     const option = document.createElement("option");
     option.value = text.id;
@@ -36,10 +39,8 @@ function initApp(statsData, textData) {
     select.appendChild(option);
   });
 
-  // 초기 렌더링
   render(textData);
 
-  // 이벤트
   select.addEventListener("change", () => {
     filters.textId = select.value;
     render(textData);
