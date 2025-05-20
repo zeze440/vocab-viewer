@@ -12,11 +12,8 @@ async function loadData() {
   try {
     document.getElementById("text-loading").style.display = "block";
 
-    const statsResponse = await fetch("stats_data.json");
-    statsData = await statsResponse.json();
-
-    const textResponse = await fetch("text_data.json");
-    textData = await textResponse.json();
+    const statsResponse = await fetch("https://zeze440.github.io/vocab-viewer/stats_data.json");
+    const textResponse = await fetch("https://zeze440.github.io/vocab-viewer/text_data.json");
 
     initApp(statsData, textData);
     document.getElementById("text-loading").style.display = "none";
