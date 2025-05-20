@@ -12,10 +12,10 @@ let filters = {
 
 async function loadData() {
   try {
-    const statsResponse = await fetch("https://zeze440.github.io/vocab-viewer/stats_data.json");
+    const statsResponse = await fetch("stats_data.json");
     statsData = await statsResponse.json();
 
-    const textResponse = await fetch("https://zeze440.github.io/vocab-viewer/text_data.json");
+    const textResponse = await fetch("text_data.json");
     textData = await textResponse.json();
 
     initApp(statsData, textData);
@@ -27,4 +27,46 @@ async function loadData() {
 
 document.addEventListener("DOMContentLoaded", loadData);
 
-// initApp는 기존 그대로 유지된다고 가정
+function initApp(statsData, textData) {
+  const container = document.getElementById("all-texts-container");
+  const select = document.getElementById("textFilter");
+
+  // 옵션 생성
+  textData.forEach((text) => {
+    const option = document.createElement("option");
+    option.value = text.id;
+    option.textContent = `지문 ${text.id}`;
+    select.appendChild(option);
+  });
+
+  // 초기 렌더링
+  render(textData);
+
+  // 이벤트
+  select.addEventListener("change", () => {
+    filters.textId = select.value;
+    render(textData);
+  });
+}
+
+function render(data) {
+  const container = document.getElementById("all-texts-container");
+  container.innerHTML = "";
+
+  data.forEach((text) => {
+    const block = document.createElement("div");
+    block.className = "text-block";
+    block.dataset.textId = text.id;
+    block.style.display = (filters.textId === "all" || filters.textId === text.id) ? "block" : "none";
+
+    const title = document.createElement("h3");
+    title.textContent = `지문 ${text.id}`;
+
+    const content = document.createElement("p");
+    content.textContent = text.content;
+
+    block.appendChild(title);
+    block.appendChild(content);
+    container.appendChild(block);
+  });
+}
