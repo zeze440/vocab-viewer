@@ -478,6 +478,11 @@
         wordTableBody.appendChild(row);
       });
 
+      // ✅ DOM이 모두 렌더된 후 이벤트 리스너 등록
+      requestAnimationFrame(() => {
+        addHighlightListeners(text.id);
+      });
+
       // 단어 하이라이팅에 이벤트 리스너 추가
       addHighlightListeners(text.id);
     }

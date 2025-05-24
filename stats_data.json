@@ -1,1 +1,1 @@
-{"total_texts": 20, "total_words": 239, "word_types": {"가변숙어": 2, "고정숙어": 32, "분리형숙어": 1, "사용자단어": 204}, "pos_distribution": {"idiom": 11, "pattern": 2, "phrasal_verb": 21, "phrasal_verb_separated": 1, "기타": 10, "동사": 39, "명사": 82, "부사": 31, "형용사": 42}}
+{"total_texts": 7, "total_words": 100, "word_types": {"": 100}, "pos_distribution": {"idiom_separated": 1, "pattern": 1, "phrasal_verb": 4, "phrasal_verb_separated": 1, "기타": 8, "동사": 27, "명사": 41, "부사": 4, "형용사": 13}}
